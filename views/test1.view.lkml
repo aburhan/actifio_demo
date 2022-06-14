@@ -155,4 +155,16 @@ view: test1 {
     type: count
     drill_fields: [job_name, app_name, policy_name, host_name]
   }
+  measure: total_change_rate {
+    type:sum
+    sql: ${change_rate_} ;;
+  }
+  measure: average_change_rate {
+    type:average
+
+    sql: CASE
+          WHEN ${change_rate_} is null THEN 0
+          ELSE ${change_rate_}
+          END ;;
+  }
 }
